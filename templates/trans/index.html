@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block con %}
+
+    <h1><b>번역기</b></h1>
+
+    <form>
+        <div class="row mt-5">
+            <div class="col-sm-5">
+                <textarea name="text" id="stext" class="form-control" style="height: 200px;" placeholder="번역전 텍스트를 입력해주세요">{{text}}</textarea>
+            </div>
+            <div class="col-sm-2 text-center" style="margin: auto;">
+                <select name="sl" id="sli" class="form-select">
+                    {% for code, name in lang.items %}
+                        <option value="{{code}}" {% if sl == code %} selected {% endif %}>{{name}}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-dark mt-3 mb-3" style="width: 100%;" onclick="check()">번역</button>
+                <select name="dl" id="dli" class="form-select">
+                    {% for code, name in lang.items %}
+                        <option value="{{code}}" {% if dl == code %} selected {% endif %}>{{name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-5">
+                <textarea class="form-control" style="height: 200px;" disabled>{{tl}}</textarea>
+            </div>
+        </div>
+    </form>
+
+
+    <script type="text/javascript">
+
+        function check() {
+
+            if (document.getElementById("stext").value == "") {
+                alert("번역할 내용이 없습니다");
+            }
+            else if (document.getElementById("sli").value == document.getElementById("dli").value) {
+                alert("서로 다른 나라 코드를 입력해주세요");
+            }
+
+        }
+
+        
+    </script>
+{% endblock %}
